@@ -2,3 +2,8 @@
 .godot/
 *.import
 build/
+
+# Supabase
+supabase/functions/.env.local
+supabase/.branches/
+supabase/migrations/*.wal
