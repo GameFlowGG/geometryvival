@@ -11,6 +11,10 @@ func _ready():
 	port_input.text = "9999"
 	status_label.text = ""
 
+	# GameFlow launches the server with --server flag — auto-host without UI
+	if "--server" in OS.get_cmdline_args():
+		_on_host_pressed()
+
 func _on_host_pressed():
 	host_btn.disabled = true
 	join_btn.disabled = true

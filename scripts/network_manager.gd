@@ -12,6 +12,7 @@ func host_game(port: int = DEFAULT_PORT) -> Error:
 	var error = peer.create_server(port, 32)
 	if error != OK:
 		return error
+	peer.get_host().compress(ENetConnection.COMPRESS_ZLIB)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
@@ -23,6 +24,7 @@ func join_game(ip: String, port: int = DEFAULT_PORT) -> Error:
 	var error = peer.create_client(ip, port)
 	if error != OK:
 		return error
+	peer.get_host().compress(ENetConnection.COMPRESS_ZLIB)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.connected_to_server.connect(_on_connected)
 	multiplayer.connection_failed.connect(_on_connection_failed)
