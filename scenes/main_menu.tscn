@@ -23,80 +23,28 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -210.0
-offset_right = 180.0
-offset_bottom = 210.0
-theme_override_constants/separation = 12
+offset_left = -160.0
+offset_top = -100.0
+offset_right = 160.0
+offset_bottom = 100.0
+theme_override_constants/separation = 14
 
 [node name="Title" type="Label" parent="VBox"]
 layout_mode = 2
 text = "GEOMETRY SURVIVAL"
 horizontal_alignment = 1
 
-[node name="Sep0" type="Control" parent="VBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="OnlineSection" type="VBoxContainer" parent="VBox"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="OnlineLabel" type="Label" parent="VBox/OnlineSection"]
-layout_mode = 2
-text = "— Play Online —"
-horizontal_alignment = 1
-modulate = Color(1, 1, 1, 0.7)
-
-[node name="UsernameInput" type="LineEdit" parent="VBox/OnlineSection"]
+[node name="UsernameInput" type="LineEdit" parent="VBox"]
 layout_mode = 2
 placeholder_text = "Your username"
 max_length = 20
 
-[node name="OnlineButton" type="Button" parent="VBox/OnlineSection"]
+[node name="OnlineButton" type="Button" parent="VBox"]
 layout_mode = 2
-text = "PLAY ONLINE"
-
-[node name="Sep1" type="Control" parent="VBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
-
-[node name="DevSection" type="VBoxContainer" parent="VBox"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="DevLabel" type="Label" parent="VBox/DevSection"]
-layout_mode = 2
-text = "— Local / Dev —"
-horizontal_alignment = 1
-modulate = Color(1, 1, 1, 0.4)
-
-[node name="IPInput" type="LineEdit" parent="VBox/DevSection"]
-layout_mode = 2
-placeholder_text = "IP Address"
-
-[node name="PortInput" type="LineEdit" parent="VBox/DevSection"]
-layout_mode = 2
-placeholder_text = "Port"
-
-[node name="Buttons" type="HBoxContainer" parent="VBox/DevSection"]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="HostButton" type="Button" parent="VBox/DevSection/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Host"
-
-[node name="JoinButton" type="Button" parent="VBox/DevSection/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Join"
+text = "PLAY"
 
 [node name="StatusLabel" type="Label" parent="VBox"]
 layout_mode = 2
 horizontal_alignment = 1
 
-[connection signal="pressed" from="VBox/OnlineSection/OnlineButton" to="." method="_on_online_pressed"]
-[connection signal="pressed" from="VBox/DevSection/Buttons/HostButton" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="VBox/DevSection/Buttons/JoinButton" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="VBox/OnlineButton" to="." method="_on_online_pressed"]
