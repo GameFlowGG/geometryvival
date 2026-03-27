@@ -2,6 +2,9 @@ extends Node2D
 
 const PLAYER_SCENE = preload("res://scenes/player.tscn")
 const ENEMY_SCENE = preload("res://scenes/enemy.tscn")
+const AGONES_SCENE = preload("res://addons/agones/agones_sdk.gd")
+
+var _agones = null
 const SHAPE_NAMES = ["Circle", "Square", "Triangle"]
 
 var survival_time: float = 0.0
@@ -27,8 +30,11 @@ func _ready():
 	game_over_label.visible = false
 
 	if multiplayer.is_server():
-		AgonesSDK.set_player_capacity(16)
-		AgonesSDK.ready()
+		if _is_dedicated_server():
+			_agones = AGONES_SCENE.new()
+			add_child(_agones)
+			_agones.set_player_capacity(16)
+			_agones.ready()
 
 		# Dedicated server: don't spawn a player for the server itself
 		if not _is_dedicated_server():
@@ -51,7 +57,7 @@ func _request_spawn():
 		_spawn_player(id)
 
 func _on_player_connected(id: int):
-	AgonesSDK.player_connect(str(id))
+	if _agones: _agones.player_connect(str(id))
 
 func _spawn_player(id: int):
 	var player = PLAYER_SCENE.instantiate()
@@ -69,7 +75,7 @@ func _remove_player(id: int):
 	if player:
 		player.queue_free()
 	damage_cooldown.erase(id)
-	AgonesSDK.player_disconnect(str(id))
+	if _agones: _agones.player_disconnect(str(id))
 
 func _physics_process(delta: float):
 	survival_time += delta
@@ -84,7 +90,7 @@ func _physics_process(delta: float):
 	health_timer += delta
 	if health_timer >= 60.0:
 		health_timer = 0.0
-		AgonesSDK.health()
+		if _agones: _agones.health()
 
 	# Difficulty ramp: shorter spawn interval over time
 	difficulty_timer += delta
@@ -182,7 +188,7 @@ func _show_game_over(time: int):
 	game_over_label.text = "GAME OVER\nSurvived: %d seconds\n\nPress ESC to return to menu" % time
 	game_over_label.visible = true
 	if multiplayer.is_server():
-		AgonesSDK.shutdown()
+		if _agones: _agones.shutdown()
 
 func _update_hud():
 	time_label.text = "Time: %d s" % int(survival_time)
