@@ -88,7 +88,7 @@ func _physics_process(delta: float):
 
 	# Agones health ping every 60 seconds
 	health_timer += delta
-	if health_timer >= 60.0:
+	if health_timer >= 5.0:
 		health_timer = 0.0
 		if _agones: _agones.health()
 
