@@ -86,6 +86,18 @@ geometryvival/
 
 ---
 
+## Documentation
+
+Full setup guide (local dev + production) is available in the GameFlow docs:
+
+👉 [Godot + Supabase Sample Project — GameFlow Docs](https://docs.gameflow.gg/sample-projects/godot-supabase)
+
+For an overview of the Supabase + GameFlow integration pattern:
+
+👉 [Supabase Backend Integration — GameFlow Docs](https://docs.gameflow.gg/backend-integrations/supabase)
+
+---
+
 ## Prerequisites
 
 - [Godot 4.6](https://godotengine.org/download) (standard, not .NET)
