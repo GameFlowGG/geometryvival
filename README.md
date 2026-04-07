@@ -12,7 +12,7 @@ This repo is intended as a **reference project** showing how to build a complete
 |---|---|
 | Game client + server | Godot 4.6 (ENet UDP multiplayer) |
 | Backend / Auth | Supabase (PostgreSQL + Auth + Realtime + Edge Functions) |
-| Game server hosting | GameFlow (Agones/Kubernetes) |
+| Game server hosting | GameFlow |
 | Edge Functions runtime | Deno (TypeScript) |
 
 ---
@@ -36,7 +36,7 @@ Clients connect to game server via ENet (UDP)
         ↓
 Game runs — server authoritative for enemies and collisions
         ↓
-All players die → Agones shuts down the server
+All players die → GameFlow shuts down the server
 ```
 
 ---
@@ -152,7 +152,7 @@ GAMEFLOW_GAME_ID=<your game id>
 GAMEFLOW_API_KEY=<your api key>
 ```
 
-Get these from the [GameFlow dashboard](https://dashboard.gameflow.gg).
+Get these from the [GameFlow dashboard](https://app.gameflow.gg).
 
 ### 5. Start Edge Functions
 
@@ -212,7 +212,7 @@ The output is `build/game.pck` (as configured in `export_presets.cfg`).
 
 ### 3. Upload to GameFlow
 
-Go to the [GameFlow dashboard](https://dashboard.gameflow.gg), select your game, and upload `build/game.pck`.
+Go to the [GameFlow dashboard](https://app.gameflow.gg), select your game, and upload `build/game.pck` as a `.zip`.
 
 > Every time you change server-side code (anything in `scripts/`), you need to re-export and re-upload the `.pck`. The game ID may change with each new upload — update `GAMEFLOW_GAME_ID` in `.env.local` accordingly.
 
